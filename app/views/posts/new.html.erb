@@ -1,2 +1,40 @@
-<h1>Posts#new</h1>
-<p>Find me in app/views/posts/new.html.erb</p>
+<h1>Créer un nouvel article de voyage</h1>
+
+<% if @post.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@post.errors.count, "erreur") %> a empêché cet article d'être enregistré :</h2>
+    <ul>
+      <% @post.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model: @post, local: true) do |form| %>
+  <p>
+    <%= form.label :title, "Titre de l'article" %><br>
+    <%= form.text_field :title %>
+  </p>
+
+  <p>
+    <%= form.label :location, "Lieu du voyage" %><br>
+    <%= form.text_field :location %>
+  </p>
+
+  <p>
+    <%= form.label :content, "Récit de votre aventure" %><br>
+    <%= form.text_area :content, rows: 10 %>
+  </p>
+
+  <p>
+    <%= form.label :image_url, "URL de l'image de couverture" %><br>
+    <%= form.text_field :image_url %>
+  </p>
+
+  <p>
+    <%= form.submit "Publier l'article" %>
+  </p>
+<% end %>
+
+<%= link_to 'Retour aux articles', posts_path %>
