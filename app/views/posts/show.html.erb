@@ -1,5 +1,8 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<%= link_to "Retour", posts_path %>
+<h1><%= @post.title %></h1>
+<p>Lieu : <%= @post.location %></p>
+<p>Publié le : <%= @post.published_at.strftime("%d/%m/%Y") %></p>
+<p><%= truncate(@post.content, length:150) %></p>
 
 <h3>Commentaires</h3>
 <% @post.comments.each do |comment| %>
