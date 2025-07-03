@@ -1,2 +1,36 @@
 <h1>Posts#show</h1>
 <p>Find me in app/views/posts/show.html.erb</p>
+
+<h3>Commentaires</h3>
+<% @post.comments.each do |comment| %>
+  <p><strong><%= comment.author %></strong> : <%= comment.body %></p>
+  <% if policy(comment).destroy? %>
+    <%= link_to 'Supprimer', post_comment_path(@post, comment), data: {confirm: "Etes vous sûr de vouloir supprimer?"}, method: :delete %>
+  <% end %>
+<% end %>
+
+<h4>Laisser un commentaire</h4>
+<% if @comment.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@comment.errors.count, "Erreur") %> a empéché ce commentaire d'être envoyé.</h2>
+    <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_with(model:[@post, @comment]) do |form| %>
+  <p>
+    <%= form.label :author, "Pseudo" %> <br>
+    <%= form.text_field :author %>
+  </p>
+  <p>
+    <%= form.label :body, "Laisser un commentaire" %> <br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit "Publier" %>
+  </p>
+<% end %>
