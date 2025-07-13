@@ -1,11 +1,31 @@
-<h1>MON BLOG DE VOYAGE</h1>
-<%= link_to "Nouvel Article", new_post_path %>
-<% @posts.each do |post| %>
-  <div class="post">
-    <h2><%= link_to post.title, post_path(post) %></h2>
-    <p>Lieu : <%= post.location %></p>
-    <p>Publié le : <%= post.published_at.strftime("%d/%m/%Y") %></p>
-    <p><%= truncate(post.content, length:150) %></p>
+<div
+  class="hero min-h-screen"
+  style="background-image: url(https://img.daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.webp);"
+>
+  <div class="hero-overlay"></div>
+  <div class="hero-content text-neutral-content text-center">
+    <div class="max-w-md">
+      <h1 class="mb-5 text-5xl font-bold">Bienvenue <i class="fa-solid fa-paper-plane"></i> </h1>
+      <p class="mb-5">
+        Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
+        quasi. In deleniti eaque aut repudiandae et a id nisi.
+      </p>
+    </div>
   </div>
-  <hr>
-<% end %>
+</div>
+
+<%= link_to "Nouvel Article", new_post_path %>
+<h2 class="text-[#76818E] text-center font-bold text-4xl my-5 pb-5">Les articles</h2>
+<div class="grid grid-cols-2 gap-6 justify-items-center">
+  <% @posts.each do |post| %>
+  <div class="bg-base-100 w-120 shadow-sm mx-auto py-5 px-3">
+    <div class="post">
+      <h2 class="text-[#76818E] text-center font-bold card-title"><%= link_to post.title, post_path(post) %></h2>
+      <p class="text-[#76818E] font-bold">Lieu : <%= post.location %></p>
+      <p class="text-[#76818E] text-center font-bold pb-2"><i class="fa-regular fa-clock"></i> <%= post.published_at.strftime("%d/%m/%Y") %></p>
+      <hr>
+      <p class="text-[#A3677F] pt-2"><%= truncate(post.content, length:150) %></p>
+    </div>
+  </div>
+  <% end %>
+</div>
